@@ -55,6 +55,10 @@ void send(const unsigned int value){
     char * txt = NULL;
     asprintf(&txt, "%u", value);
     fd = open(CHRDEV_PATH, O_WRONLY);
+    if(fd < 0){
+        perror("Failder to open CHRDEV");
+        exit(0);
+    }
 
     write(fd, txt, BUFFER_SIZE);
 
