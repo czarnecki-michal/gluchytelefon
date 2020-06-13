@@ -78,11 +78,8 @@ void send(const unsigned int value){
             char * txt = NULL;
             asprintf(&txt, "%u", value);
             fd = open(FIFO_PATH, O_WRONLY);
-
-            if(write(fd, txt, sizeof(int) * 8) < 0){
-                logger(ERROR, "Couldn't write to fifo");
-                exit(0);
-            }   
+            write(fd, txt, sizeof(int) * 8);
+            
             close(fd);
             free(txt);
             exit(0);

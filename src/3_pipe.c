@@ -18,21 +18,18 @@ int main(){
     sprintf(buffer, "%ld", number);
     logger(OUTPUT, buffer);
 
-    // send(number);
+    send(number);
 
     return 0;
 }
 
 long int receive(){
     int fd;
-    char buffer[sizeof(int) * 8];
+    char buffer[BUFFER_SIZE];
 
     fd = open(FIFO_PATH, O_RDONLY);
 
-    if(read(fd, buffer, sizeof(int) * 8) < 0){
-        logger(ERROR, "Couldn't read from fifo");
-        exit(0);
-    }
+    read(fd, buffer, BUFFER_SIZE);
 
     close(fd);
     unlink(FIFO_PATH);
@@ -50,4 +47,19 @@ long int transform(long int value){
     c_data = set_bit(c_data, value);
 
     return c_data;
+}
+
+void send(const unsigned int value){
+    int fd; 
+
+    char * txt = NULL;
+    asprintf(&txt, "%u", value);
+    fd = open(CHRDEV_PATH, O_WRONLY);
+
+    write(fd, txt, BUFFER_SIZE);
+
+    close(fd);
+    free(txt);
+
+    execl("./4_jajko.out", "software", NULL);
 }

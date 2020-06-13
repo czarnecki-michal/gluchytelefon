@@ -7,6 +7,7 @@
 
 #define BUFFER_SIZE 255
 #define FIFO_PATH "/tmp/gluchytelefon"
+#define CHRDEV_PATH "/dev/jajko"
 
 typedef enum infoType
 {

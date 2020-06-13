@@ -10,6 +10,7 @@
 #include <math.h>
 
 long int receive();
+void send(const unsigned int);
 long int transform(long int);
 int bin2dec(long);
 long int set_bit(unsigned int, unsigned int);
