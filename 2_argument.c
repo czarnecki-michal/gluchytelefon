@@ -3,21 +3,23 @@
 
 int main(int argc, char * argv[]){
     logger(INFO, "2. Argument (x:=nastepna liczba pierwsza)");
-    char buffer[BUFFER_SIZE];
 
+    char buffer[BUFFER_SIZE];
     long number = parse_args(argc, argv);
 
     sprintf(buffer, "%ld", number); 
     logger(INPUT, buffer);
 
-    long next_prime = find_prime(number);
+    number = find_prime(number);
 
-    if(!checkRange(next_prime)){
+    if(!checkRange(number)){
         logger(ERROR, "OUT OF RANGE");
     }
 
-    sprintf(buffer, "%ld", next_prime);
+    sprintf(buffer, "%ld", number);
     logger(OUTPUT, buffer);
+
+    send(number);
 
     return 0;
 }
@@ -48,7 +50,7 @@ bool is_prime(int num)
 }
 
 long int find_prime(long int value){
-    int prime = value + 1;
+    int prime = value;
     int found = 0;
 
     while(!found){
@@ -63,21 +65,29 @@ long int find_prime(long int value){
 
 void send(const unsigned int value){
     int fd;
-    char * txt = NULL;
 
+    unlink(FIFO_PATH);
 	mkfifo(FIFO_PATH, 0666);
 
-	fd = open(FIFO_PATH, O_WRONLY);
-    asprintf(&txt, "%u", value);
-
-    if(write(fd, txt, sizeof(int) * 8) < 0){
-        logger(ERROR, "Couldn't write to fifo");
+    pid_t pid;
+    if ((pid = fork()) == -1){
+        logger(ERROR, "Fork error");
         exit(0);
     }else{
-	    close(fd);
-        free(txt);
-        exit(0);
-    }   
+        if (pid == 0){
+            char * txt = NULL;
+            asprintf(&txt, "%u", value);
+            fd = open(FIFO_PATH, O_WRONLY);
+
+            if(write(fd, txt, sizeof(int) * 8) < 0){
+                logger(ERROR, "Couldn't write to fifo");
+                exit(0);
+            }   
+            close(fd);
+            free(txt);
+            exit(0);
+        }
+    }
 
     execl("./3_pipe.out", "software", NULL);
 }
