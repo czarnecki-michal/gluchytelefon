@@ -2,6 +2,7 @@
 *.ko
 *.o
 *.c
+*.d
 .tmp_versions
 *.cmd
 Module.symvers
