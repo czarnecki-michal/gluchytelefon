@@ -9,5 +9,6 @@
 #include <sys/stat.h>
 
 long int receive();
+unsigned int reverse_bits(unsigned int);
 
 #endif
