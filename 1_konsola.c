@@ -4,7 +4,7 @@
 int main(){
     long int value = 0;
 
-    logger(INFO, "1.Konsola (x:=modulo 10)");
+    logger(INFO, "1. Konsola (x:=modulo 10)");
     while (true){
         printf("Enter number between 0 and %u: ", UINT_MAX);
         if (scanf("%ld", &value)){
@@ -13,6 +13,10 @@ int main(){
                 logger(ERROR, "OUT OF RANGE");
                 continue;
             }
+
+            sprintf(buffer, "%ld", value);
+            logger(INPUT, buffer);
+
             value = transform(value);
 
             if(!checkRange(value)){
@@ -36,7 +40,7 @@ long int transform(long int value){
     return value % 10;
 }
 
-void send(unsigned int value){
+void send(const unsigned int value){
     char * command = NULL;
     asprintf(&command, "./2_argument.out -i %d", value);
     system(command);
