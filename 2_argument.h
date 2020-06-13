@@ -7,11 +7,15 @@
 #include <stdbool.h> 
 #include <unistd.h>
 #include <getopt.h>
+#include <fcntl.h>
+#include <sys/stat.h>
+#include <string.h>
 
 int argv_to_int(char *);
 long int transform(long int);
 bool is_prime(int);
 long int find_prime(long int);
 long int parse_args(int, char *[]);
+void send(const unsigned int);
 
 #endif

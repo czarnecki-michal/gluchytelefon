@@ -6,6 +6,7 @@
 #include <stdbool.h>
 
 #define BUFFER_SIZE 255
+#define FIFO_PATH "/tmp/gluchytelefon"
 
 typedef enum infoType
 {

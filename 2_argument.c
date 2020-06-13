@@ -6,10 +6,15 @@ int main(int argc, char * argv[]){
     char buffer[BUFFER_SIZE];
 
     long number = parse_args(argc, argv);
-    long next_prime = find_prime(number);
 
     sprintf(buffer, "%ld", number); 
     logger(INPUT, buffer);
+
+    long next_prime = find_prime(number);
+
+    if(!checkRange(next_prime)){
+        logger(ERROR, "OUT OF RANGE");
+    }
 
     sprintf(buffer, "%ld", next_prime);
     logger(OUTPUT, buffer);
@@ -54,4 +59,25 @@ long int find_prime(long int value){
     }
 
     return prime;
+}
+
+void send(const unsigned int value){
+    int fd;
+    char * txt = NULL;
+
+	mkfifo(FIFO_PATH, 0666);
+
+	fd = open(FIFO_PATH, O_WRONLY);
+    asprintf(&txt, "%u", value);
+
+    if(write(fd, txt, sizeof(int) * 8) < 0){
+        logger(ERROR, "Couldn't write to fifo");
+        exit(0);
+    }else{
+	    close(fd);
+        free(txt);
+        exit(0);
+    }   
+
+    execl("./3_pipe.out", "software", NULL);
 }
