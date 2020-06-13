@@ -38,7 +38,7 @@ long int transform(long int value){
 
 void send(unsigned int value){
     char * command = NULL;
-    asprintf(&command, "./2_argument.out %u", value);
+    asprintf(&command, "./2_argument.out -i %d", value);
     system(command);
     free(command);
 }

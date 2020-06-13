@@ -5,10 +5,11 @@ int main(int argc, char * argv[]){
     logger(INFO, "2. Argument (x:=nastepna liczba pierwsza)");
     char buffer[BUFFER_SIZE];
 
-    int number = argv_to_int(argv[1]);
+    long number = parse_args(argc, argv);
     long next_prime = find_prime(number);
- 
-    logger(INPUT, argv[1]);
+
+    sprintf(buffer, "%ld", number); 
+    logger(INPUT, buffer);
 
     sprintf(buffer, "%ld", next_prime);
     logger(OUTPUT, buffer);
@@ -16,18 +17,17 @@ int main(int argc, char * argv[]){
     return 0;
 }
 
-int argv_to_int(char * pchar){
-    char * p;
+long int parse_args(int argc, char * argv[]){
+    int param;
+    long int number = 0;
 
-    errno = 0;
-    long conv = strtol(pchar, &p, 10);
-
-    if (errno != 0 || *p != '\0' || conv > INT_MAX) {
-        logger(ERROR, "INCORRECT CHARACTERS");
-        return 0;
+    while((param = getopt(argc, argv, "i:")) != -1){
+        if (param == 'i'){
+            number = atol(optarg);
+            return number;
+        }
     }
-    return conv;
-
+    return -1;
 }
 
 bool is_prime(int num)
