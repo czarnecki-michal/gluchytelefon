@@ -20,4 +20,4 @@ clean:
 	cd $(APP) && $(MAKE) clean
 
 run:
-	cd $(APP) && ./1konsola.py
+	cd $(APP) && ./1_konsola.out
