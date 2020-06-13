@@ -10,6 +10,10 @@ bool checkRange(const long int value){
 void logger(infoType type, char msg[]){
     switch (type)
     {
+        case INFO:
+            printf("[INFO] %s\n", msg);
+            break;
+            
         case ERROR:
             printf("[ERROR] %s\n", msg);
             break;

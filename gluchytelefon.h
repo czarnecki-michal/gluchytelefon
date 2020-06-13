@@ -9,6 +9,7 @@
 
 typedef enum infoType
 {
+    INFO,
     ERROR,
     INPUT,
     OK,
