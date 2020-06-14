@@ -8,6 +8,8 @@
 #define BUFFER_SIZE 255
 #define FIFO_PATH "/tmp/gluchytelefon"
 #define CHRDEV_PATH "/dev/jajko"
+#define TCP_HOST "localhost"
+#define TCP_PORT 7777
 
 typedef enum infoType
 {
