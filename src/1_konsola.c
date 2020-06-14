@@ -8,14 +8,12 @@ int main(){
     while (true){
         printf("Enter number between 0 and %u: ", UINT_MAX);
         if (scanf("%ld", &value)){
-            char buffer[BUFFER_SIZE];
             if(!checkRange(value)){
                 logger(ERROR, "OUT OF RANGE");
                 continue;
             }
 
-            sprintf(buffer, "%ld", value);
-            logger(INPUT, buffer);
+            printf("[INPUT] %ld\n", value);
 
             value = transform(value);
 
@@ -23,8 +21,7 @@ int main(){
                 logger(ERROR, "OUT OF RANGE");
                 continue;
             }
-            sprintf(buffer, "%ld", value);
-            logger(OUTPUT, buffer);
+            printf("[OUTPUT] %ld\n", value);
 
             send((unsigned int) value);
         }

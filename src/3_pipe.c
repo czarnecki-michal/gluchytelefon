@@ -4,19 +4,16 @@
 int main(){
     logger(INFO, "3. Pipe (x:= ustawienie bitu na pozycji określonej przez x)");
 
-    char buffer[BUFFER_SIZE];
     long int number = receive();
 
-    sprintf(buffer, "%ld", number);
-    logger(INPUT, buffer);
-    
+    printf("[INPUT] %ld\n", number);
+
     number = transform(number);
     if(!checkRange(number)){
         logger(ERROR, "OUT OF RANGE");
     }
 
-    sprintf(buffer, "%ld", number);
-    logger(OUTPUT, buffer);
+    printf("[OUTPUT] %ld\n", number);
 
     send(number);
 

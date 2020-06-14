@@ -2,13 +2,11 @@
 #include"2_argument.h"
 
 int main(int argc, char * argv[]){
-    logger(INFO, "2. Argument (x:=nastepna liczba pierwsza)");
+    printf("[INFO] 2. Argument (x:=nastepna liczba pierwsza)");
 
-    char buffer[BUFFER_SIZE];
     long number = parse_args(argc, argv);
 
-    sprintf(buffer, "%ld", number); 
-    logger(INPUT, buffer);
+    printf("[INPUT] %ld\n", number);
 
     number = find_prime(number);
 
@@ -16,8 +14,8 @@ int main(int argc, char * argv[]){
         logger(ERROR, "OUT OF RANGE");
     }
 
-    sprintf(buffer, "%ld", number);
-    logger(OUTPUT, buffer);
+    printf("[OUTPUT] %ld\n", number);
+
 
     send(number);
 
