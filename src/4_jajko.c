@@ -12,6 +12,8 @@ int main(){
 
     printf("[OUTPUT] %ld\n", number);
 
+    send(number);
+
     return 0;
 }
 
@@ -45,3 +47,11 @@ unsigned int reverse_bits(unsigned int num)
    
     return reverse_num; 
 } 
+
+void send(const unsigned int value){
+    //TODO
+    char * command = NULL;
+    asprintf(&command, "./5_netlink.out -i %d", value);
+    system(command);
+    free(command);
+}

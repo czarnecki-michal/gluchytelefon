@@ -10,5 +10,6 @@
 
 long int receive();
 unsigned int reverse_bits(unsigned int);
+void send(const unsigned int);
 
 #endif
