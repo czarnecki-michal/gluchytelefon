@@ -1,8 +1,8 @@
 *.out
 *.ko
 *.o
-*.c
 *.d
+*.mod.c
 .tmp_versions
 *.cmd
 Module.symvers
