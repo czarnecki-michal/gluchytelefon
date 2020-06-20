@@ -31,3 +31,5 @@ Wszystkie programy powinny być budowane za pomocą makefile'ow (np. autotools, 
 >- https://opensourceforu.com/2015/08/netlink-a-communication-mechanism-in-linux/  
 >- https://people.redhat.com/nhorman/papers/netlink.pdf
 
+
+## Wykonal Michal Czarnecki
