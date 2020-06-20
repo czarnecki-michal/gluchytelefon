@@ -10,5 +10,6 @@
 
 #define h_addr h_addr_list[0]
 long int receive();
+void nsend(const long int);
 
 #endif

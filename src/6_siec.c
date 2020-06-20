@@ -9,6 +9,8 @@ int main(int argc, char * argv[]){
 
     printf("[INPUT] %ld\n", number);
 
+    nsend(number);
+
     return 0;
 }
 
@@ -49,4 +51,31 @@ long int receive(){
 
     close(cli_socket);
     return atol(buffer);
+}
+
+void nsend(const long int number)
+{
+    pid_t pid;
+    if ((pid = fork()) == -1)
+    {
+        perror("Fork error");
+        exit(0);
+    }
+    else
+    {
+        if (pid == 0)
+        {
+            char * txt = NULL;
+            if (checkRange(number))
+            {
+                asprintf(&txt, "%ld", number);
+            }
+            else
+            {
+                printf("[ERROR] Out of range\n");
+            }
+            execl("/usr/bin/xterm", "xterm", "-hold", "-e", "echo", txt, NULL);
+            free(txt);
+        }
+    }
 }
